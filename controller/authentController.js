@@ -1,4 +1,4 @@
-const user = require("./models/user");
+const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const maxperiod = 24*60*60;
 const handleError = (err)=>{
@@ -34,8 +34,10 @@ const createToken = (id) =>{
     });
 };
 
-module.exports.profile = (req,res)=>{
-    res.send("profile");
+module.exports.profile = async(req,res)=>{
+    try{
+        const result = await User.find() ; res.send(result);
+    } catch (error) { console.log(error)}
 };
 
 module.exports.signup = async(req,res)=>{
@@ -57,7 +59,7 @@ module.exports.login = async(req,res)=>{
         res.cookie("jwt",token,{
             sameSite:"None",
             httOnly:true,
-            maxAge: maxPeriod *1000,
+            maxAge: maxperiod *1000,
         });
 
         res.status(200).json({
@@ -72,6 +74,6 @@ module.exports.login = async(req,res)=>{
 };
 
 module.exports.logout = (req,res)=>{
-    res.cookies("jwt","",{ maxAge:1});
+    res.cookie("jwt","",{ maxAge:1});
     res.status(200).json({ status: 200, message: "Successfully logged out"});
 };

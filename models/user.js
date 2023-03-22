@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
-const blogUsers = new user({
+const userSchema = mongoose.Schema;
+
+const blogUsers = new userSchema({
     username:{
         type:String,
         require:true
@@ -32,3 +34,18 @@ blogUsers.pre("save",function(next){
         });
     });
 });
+
+blogUsers.statics.login = async function(email, password) {
+    const user = await this.findOne({ email });
+    if (user) {
+      const auth = await bcrypt.compare(password, user.password);
+      if (auth) {
+        return user;
+      }
+      throw Error("invalid password");
+    }
+    throw Error("incorrect email");
+  };
+
+const users = mongoose.model('user',blogUsers);
+module.exports = users;
