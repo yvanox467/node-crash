@@ -138,9 +138,31 @@ router.post('/create',blogController.createBlog);
    */
 
 
- router.put('/:id',blogController.updateBlog)
+ router.update('/:id',blogController.updateBlog)
 
-
+/**
+ * @swagger
+ * tags:
+ *  put:
+ *    summary: Update the book by the id
+ *    tags: 
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        description: The ID  of the blog to update
+ *        schema:
+ *          type: string
+ *        description: The updated blog
+ *          content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Book'
+ *      404:
+ *        description: The book was not found
+ *      500:
+ *        description: Some error happened
+ */
 router.delete('/:id',blogController.deleteBlog)
 
  /**

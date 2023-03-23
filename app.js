@@ -4,6 +4,7 @@ const blogRouter = require('./routes/blogRoutes')
 const authRouter = require('./routes/authRouters')
 const swaggerUI = require('swagger-ui-express')
 const swaggerJS = require('swagger-jsdoc')
+const cors = require('cors')
 
 
 //express app
@@ -74,7 +75,7 @@ const options = {
  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 
 
-
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json())
 app.use('/blogs',blogRouter)
