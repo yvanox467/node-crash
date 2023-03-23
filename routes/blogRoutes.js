@@ -138,6 +138,9 @@ router.post('/create',blogController.createBlog);
    */
 
 
+ router.put('/:id',blogController.updateBlog)
+
+
 router.delete('/:id',blogController.deleteBlog)
 
  /**
