@@ -6,13 +6,18 @@ const blogSchema = new Schema({
         type: String,
         required: true
     },
-    snippet:{
+    author:{
         type: String,
         require: true
     },
     body:{
         type: String,
         required: true
+    },
+    picture:{
+        type:String,
+        required:true
+
     }
 },{ timestamps: true});
 
