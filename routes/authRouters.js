@@ -133,3 +133,65 @@ authRouter.post("/login", authentController.login);
 authRouter.post("/logout", authentController.logout);
 
 module.exports = authRouter;
+
+
+ /**
+   * @swagger
+   * tags:
+   *  name: Blog
+   *  description: Blog managing APIs
+   * /blogs/{id}:
+   *  delete:
+   *   summary: Delete a blog
+   *   tags: [Blog]
+   *   parameters:
+   *     - name: id
+   *       in: path
+   *       required: true
+   *       description: The ID of the blog to delete.
+   *       schema:
+   *         type: string
+   *   responses:
+   *    200:
+   *      description: Deleted blog
+   *      content:
+   *        application/json:
+   *          schema:
+   *            type: object
+   *            properties:
+   *                data:
+   *                  type: object
+   *                status:
+   *                  type: integer
+   *                message:
+   *                  type: string
+   *            example:
+   *                data:
+   *                    {
+   *                       "_id": "6408346dd82cffa860074200",
+   *                      "title": "The blog name",
+   *                     "content": "How are you?",
+   *                    "likes": 2,
+   *                       "thumbnail": "sdasdas",
+   *                       "createdAt": "2020-02-08T07:08:29.851Z",
+   *                       "updatedAt": "2022-02-08T07:08:29.851Z",
+   *                       "__v": 0
+   *                   }
+   *
+   *                status: 200
+   *                message: "blog deleted successfully"
+   *    400:
+   *      description: Authorization error
+   *      content:
+   *        application/json:
+   *          schema:
+   *            type: object
+   *            properties:
+   *                status:
+   *                  type: integer
+   *                message:
+   *                  type: string
+   *            example:
+   *                status: 400
+   *                message: "You're not logged in"
+   */
