@@ -40,7 +40,7 @@ module.exports.deleteBlog = (req,res) => {
 };
 
 module.exports.updateBlog = (req,res) =>{
-    Blog.findByIdAndUpdate(req,params,id)
+    Blog.findByIdAndUpdate(req.params.id)
     .then((result) =>
     res.json({
         data:result,

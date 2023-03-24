@@ -67,6 +67,16 @@ const options = {
   console.log(options);
  const specs = swaggerJS(options)
  // middleware
+
+ app.use(cors( {
+  origin: ["http://localhost:3000", "https://luminous-kelpie-466578.netlify.app/"],
+  preflightContinue: true,
+  credentials: true,
+}
+
+));
+
+
  app.get('/api-docs.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(specs);
@@ -75,7 +85,9 @@ const options = {
  app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 
 
-app.use(cors());
+ 
+
+
 app.use(morgan('dev'));
 app.use(express.json())
 app.use('/blogs',blogRouter)

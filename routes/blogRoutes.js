@@ -138,7 +138,7 @@ router.post('/create',blogController.createBlog);
    */
 
 
- router.update('/:id',blogController.updateBlog)
+ router.put('/:id',blogController.updateBlog)
 
 /**
  * @swagger
