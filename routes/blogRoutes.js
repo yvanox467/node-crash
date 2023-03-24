@@ -225,6 +225,128 @@ router.delete('/:id',blogController.deleteBlog)
    *                status: 400
    *                message: "You're not logged in"
    */
+
+ 
+ .get("/:blogId/comments", commentController.index)
+
+ /**
+  * @swagger
+  * tags:
+  *  name: Blog Comment
+  *  description: Blog comment APIs
+  * /blogs/{blogId}/comments:
+  *  post:
+  *   summary: Creating new comment
+  *   tags: [Blog Comment]
+  *   parameters:
+  *     - name: blogId
+  *       in: path
+  *       required: true
+  *       description: The ID of the blog to comment on.
+  *       schema:
+  *         type: string
+  *   requestBody:
+  *      required: true
+  *      content:
+  *        application/json:
+  *          schema:
+  *              type: object
+  *              properties:
+  *                names:
+  *                  type: string
+  *                comment:
+  *                  type: string
+  *              example:
+  *                names: "your names"
+  *                comment:  "your comment"
+  *   responses:
+  *    200:
+  *      description: List of comments
+  *      content:
+  *        application/json:
+  *          schema:
+  *            type: object
+  *            properties:
+  *                data:
+  *                  type: array
+  *                status:
+  *                  type: integer
+  *                message:
+  *                  type: string
+  *            example:
+  *                data:
+  *                  [
+  *                    {
+  *                      comment: "First comment",
+  *                      names: "jOHN",
+  *                      _id: "6409a440b32b13e54c9372aa"
+  *                    }
+  *                   ]
+  *                status: 200
+  *                message: "Comment added successfully"
+  *    404:
+  *      description: Not found error
+  *      content:
+  *        application/json:
+  *          schema:
+  *            type: object
+  *            properties:
+  *                status:
+  *                  type: integer
+  *                message:
+  *                  type: string
+  *            example:
+  *                status: 404
+  *                message: "Blog not found"
+  */
+ .post("/:blogId/comments", commentController.store)
+ /**
+  * @swagger
+  * tags:
+  *  name: Blog Like
+  *  description: Blog Like API
+  * /blogs/{id}/likes:
+  *  post:
+  *   summary: Like a blog
+  *   tags: [Blog Like]
+  *   parameters:
+  *     - name: id
+  *       in: path
+  *       required: true
+  *       description: The ID of the blog to like.
+  *       schema:
+  *         type: string
+  *   responses:
+  *    200:
+  *      description: List a liked blog
+  *      content:
+  *        application/json:
+  *          schema:
+  *            type: object
+  *            properties:
+  *                data:
+  *                  type: object
+  *                status:
+  *                  type: integer
+  *                message:
+  *                  type: string
+  *            example:
+  *                data:
+  *                    {
+  *                      "_id": "6408346dd82cffa860074200",
+  *                      "title": "My First Blog",
+  *                      "content": "hellO PEOPLE",
+  *                      "likes": 2,
+  *                       "thumbnail": "sdasdas",
+  *                       "createdAt": "2023-03-08T07:08:29.851Z",
+  *                       "updatedAt": "2023-03-08T07:08:29.851Z",
+  *                       "__v": 0
+  *                   }
+  *
+  *                status: 200
+  *                message: "blog liked successfully"
+  */
+ .post("/:blogId/likes", blogController.like);
 module.exports = router;
 
 
