@@ -1,4 +1,6 @@
 const Blog = require('../models/blog')
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 
 module.exports.allBlogs = (req,res) => {
     Blog.find().then((blogs)=>{
@@ -19,14 +21,7 @@ module.exports.singleBlog = (req,res) => {
     })
     .catch((err)=> console.log(err));
 };
-module.exports.createBlog = (req,res) => {
-    const blog = new Blog(req.body)
-    blog.save().then((result)=>{
-        res.status(200).json({data:[result], status:200, message:'blog created successfully'})
-    }).catch((err)=>{
-        res.json({data:[], status:400, message:err.message})
-    })
-}
+//module.exports.createBlog   
 module.exports.deleteBlog = (req,res) => {
     Blog.findByIdAndDelete(req.params.id)
     .then((result)=>

@@ -1,5 +1,7 @@
 const mongoose =require('mongoose');
 const Schema = mongoose.Schema;
+const cloudinary = require("../utils/cloudinary");
+const upload = require("../utils/multer");
 
 const blogSchema = new Schema({
     title: {
@@ -16,8 +18,10 @@ const blogSchema = new Schema({
     },
     picture:{
         type:String,
-        required:true
 
+    },
+    cloudinary_id:{
+        type:String,
     }
 },{ timestamps: true});
 
